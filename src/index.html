@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,35 @@
     <link rel="stylesheet" href="styles/style.css">
     <title>Uchiha Invader</title>
 </head>
+
 <body>
     <div class="game-section">
-        <div class="score">777 points</div>
+        <div class="game-score">777 points</div>
         <div class="game-start">Press here to Play!</div>
         <div class="game-area"></div>
         <div class="game-over"></div>
     </div>
 
     <script>
-        console.log(`hello world`);
+        const gameStart = document.querySelector('.game-start');
+        const gameArea = document.querySelector('.game-area');
+        const gameOver = document.querySelector('.game-over');
+        const gameScore = document.querySelector('.game-score');
+
+        gameStart.addEventListener('click', onGameStart)
+
+        function onGameStart() {
+            gameStart.classList.add('hide');
+            alert('game started, click okey to continue!');
+
+            const uchiha = document.createElement('div');
+            uchiha.classList.add('uchiha')
+            uchiha.style.top ='200px';
+            uchiha.style.left='300px';
+            
+            gameArea.appendChild(uchiha);
+        }
     </script>
 </body>
+
 </html>

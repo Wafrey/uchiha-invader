@@ -8,15 +8,19 @@
 
 /* Main CSS */
 
-body{
+body {
     font-family: 'Courier New', Courier, monospace;
     line-height: 1.5;
     font-size: 18px;
 }
 
+.hide {
+    display: none;
+}
+
 /* Game section CSS */
 
-.game-section{
+.game-section {
     position: relative;
 }
 
@@ -44,7 +48,7 @@ body{
     text-align: center;
 }
 
-.game-start:hover{
+.game-start:hover {
     font-size: 1.8rem;
     background: rgb(44, 41, 41);
     border: 2px solid #FFF;
@@ -54,10 +58,22 @@ body{
 
 /* Score CSS */
 
-.score{
+.game-score {
     position: absolute;
     z-index: 1;
     background: rgb(44, 41, 41);
     color: #FFF;
     text-align: center;
+    margin-left: 1rem;
+    margin-top: 0.3rem;
+}
+
+/* Uchiha CSS */
+
+.uchiha {
+    position: absolute;
+    width: 90px;
+    height: 156px;
+    background-image: url(../images/sasuke.png);
+    background-size: cover;
 }
