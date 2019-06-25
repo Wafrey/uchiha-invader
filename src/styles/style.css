@@ -1,0 +1,63 @@
+/* Reset */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main CSS */
+
+body{
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.5;
+    font-size: 18px;
+}
+
+/* Game section CSS */
+
+.game-section{
+    position: relative;
+}
+
+/* Game area CSS */
+
+.game-area {
+    position: absolute;
+    background-color: rgb(44, 41, 41);
+    width: 100%;
+    height: 100vh;
+}
+
+/* Game start CSS */
+
+.game-start {
+    font-size: 1.5rem;
+    position: absolute;
+    background: #FFF;
+    width: 50%;
+    top: 170px;
+    left: 25%;
+    z-index: 1;
+    padding: 35px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.game-start:hover{
+    font-size: 1.8rem;
+    background: rgb(44, 41, 41);
+    border: 2px solid #FFF;
+    color: #FFF;
+    cursor: pointer;
+}
+
+/* Score CSS */
+
+.score{
+    position: absolute;
+    z-index: 1;
+    background: rgb(44, 41, 41);
+    color: #FFF;
+    text-align: center;
+}
