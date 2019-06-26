@@ -23,7 +23,18 @@
         const gameOver = document.querySelector('.game-over');
         const gameScore = document.querySelector('.game-score');
 
-        gameStart.addEventListener('click', onGameStart)
+        gameStart.addEventListener('click', onGameStart);
+        document.addEventListener('keydown', onKeyDown);
+        document.addEventListener('keyup', onKeyUp);
+
+        let keys = {};
+        let player = {
+            x: 30,
+            y: 200
+        };
+        let game = {
+            speed: 2,
+        };
 
         function onGameStart() {
             gameStart.classList.add('hide');
@@ -31,10 +42,48 @@
 
             const uchiha = document.createElement('div');
             uchiha.classList.add('uchiha')
-            uchiha.style.top ='200px';
-            uchiha.style.left='300px';
-            
+            uchiha.style.top = player.y + 'px';
+            uchiha.style.left = player.x + 'px';
             gameArea.appendChild(uchiha);
+
+            window.requestAnimationFrame(gameAction)
+        }
+
+        function gameAction() {
+
+            const uchiha = document.querySelector('.uchiha');
+            console.log(uchiha);
+
+            if (keys.ArrowUp) {
+                player.y -= game.speed;
+                uchiha.style.top = player.y + 'px'
+
+            }
+
+            if (keys.ArrowDown) {
+
+            }
+
+            if (keys.ArrowLeft) {
+
+            }
+
+            if (keys.ArrowRight) {
+
+            }
+
+            window.requestAnimationFrame(gameAction)
+        }
+
+        function onKeyDown(e) {
+
+            keys[e.code] = true;
+            console.log(keys);
+        }
+
+        function onKeyUp(e) {
+
+            keys[e.code] = false;
         }
     </script>
 </body>
