@@ -56,12 +56,13 @@
 
             if (keys.ArrowUp) {
                 player.y -= game.speed;
-                uchiha.style.top = player.y + 'px'
+                uchiha.style.top = player.y + 'px';
 
             }
 
             if (keys.ArrowDown) {
-
+                player.y+=game.speed;
+                uchiha.style.top=player.y+'px';
             }
 
             if (keys.ArrowLeft) {
