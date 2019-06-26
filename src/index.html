@@ -11,7 +11,7 @@
 
 <body>
     <div class="game-section">
-        <div class="game-score">777 points</div>
+        <div class="game-score"><span class="points">0</span> points</div>
         <div class="game-start">Press here to Play!</div>
         <div class="game-area"></div>
         <div class="game-over"></div>
@@ -22,6 +22,8 @@
         const gameArea = document.querySelector('.game-area');
         const gameOver = document.querySelector('.game-over');
         const gameScore = document.querySelector('.game-score');
+        const gamePoints = document.querySelector('.game-score .points');
+        console.log(gamePoints);
 
         gameStart.addEventListener('click', onGameStart);
         document.addEventListener('keydown', onKeyDown);
@@ -38,6 +40,10 @@
             speed: 2,
             movingMultiplier: 3
         };
+
+        let gameScene = {
+            score: 0
+        }
 
         function onGameStart() {
             gameStart.classList.add('hide');
@@ -60,9 +66,9 @@
 
             // Gravity
 
-            let isInAir= (player.y + player.height) + 50 < gameArea.offsetHeight;
+            let isInAir = (player.y + player.height) + 50 < gameArea.offsetHeight;
             if (isInAir) {
-                player.y+=game.speed;
+                player.y += game.speed;
                 uchiha.style.top = player.y + 'px';
             }
 
@@ -88,13 +94,16 @@
                 uchiha.style.left = player.x + 'px';
             }
 
+            // Score
+
+            gamePoints.textContent = gameScene.score++;
+            
             window.requestAnimationFrame(gameAction)
         }
 
         function onKeyDown(e) {
 
             keys[e.code] = true;
-            console.log(keys);
         }
 
         function onKeyUp(e) {
