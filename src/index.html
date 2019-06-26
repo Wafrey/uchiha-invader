@@ -34,6 +34,7 @@
         };
         let game = {
             speed: 2,
+            movingMultiplier: 3
         };
 
         function onGameStart() {
@@ -55,22 +56,24 @@
             console.log(uchiha);
 
             if (keys.ArrowUp) {
-                player.y -= game.speed;
+                player.y -= game.speed * game.movingMultiplier;
                 uchiha.style.top = player.y + 'px';
 
             }
 
             if (keys.ArrowDown) {
-                player.y+=game.speed;
-                uchiha.style.top=player.y+'px';
+                player.y += game.speed * game.movingMultiplier;
+                uchiha.style.top = player.y + 'px';
             }
 
             if (keys.ArrowLeft) {
-
+                player.x -= game.speed * game.movingMultiplier;
+                uchiha.style.left = player.x + 'px';
             }
 
             if (keys.ArrowRight) {
-
+                player.x += game.speed * game.movingMultiplier;
+                uchiha.style.left = player.x + 'px';
             }
 
             window.requestAnimationFrame(gameAction)
