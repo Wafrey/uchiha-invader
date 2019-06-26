@@ -30,7 +30,9 @@
         let keys = {};
         let player = {
             x: 30,
-            y: 200
+            y: 200,
+            width: 0,
+            height: 0
         };
         let game = {
             speed: 2,
@@ -46,6 +48,8 @@
             uchiha.style.top = player.y + 'px';
             uchiha.style.left = player.x + 'px';
             gameArea.appendChild(uchiha);
+            player.width = uchiha.offsetWidth;
+            player.height = uchiha.offsetHeight;
 
             window.requestAnimationFrame(gameAction)
         }
@@ -53,25 +57,33 @@
         function gameAction() {
 
             const uchiha = document.querySelector('.uchiha');
-            console.log(uchiha);
 
-            if (keys.ArrowUp) {
-                player.y -= game.speed * game.movingMultiplier;
+            // Gravity
+
+            let isInAir= (player.y + player.height) + 50 < gameArea.offsetHeight;
+            if (isInAir) {
+                player.y+=game.speed;
                 uchiha.style.top = player.y + 'px';
-
             }
 
-            if (keys.ArrowDown) {
+            // Register Player input.
+
+            if (keys.ArrowUp && player.y > 35) {
+                player.y -= game.speed * game.movingMultiplier;
+                uchiha.style.top = player.y + 'px';
+            }
+
+            if (keys.ArrowDown && isInAir) {
                 player.y += game.speed * game.movingMultiplier;
                 uchiha.style.top = player.y + 'px';
             }
 
-            if (keys.ArrowLeft) {
+            if (keys.ArrowLeft && player.x > 10) {
                 player.x -= game.speed * game.movingMultiplier;
                 uchiha.style.left = player.x + 'px';
             }
 
-            if (keys.ArrowRight) {
+            if (keys.ArrowRight && player.x + player.width + 10 < gameArea.offsetWidth) {
                 player.x += game.speed * game.movingMultiplier;
                 uchiha.style.left = player.x + 'px';
             }
