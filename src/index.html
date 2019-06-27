@@ -34,11 +34,14 @@
             x: 30,
             y: 200,
             width: 0,
-            height: 0
+            height: 0,
+            lastTimeFiredFireball: 0
         };
         let game = {
             speed: 2,
-            movingMultiplier: 3
+            movingMultiplier: 3,
+            fireBallMultiplier: 3,
+            fireInterval: 1000
         };
 
         let gameScene = {
@@ -60,9 +63,21 @@
             window.requestAnimationFrame(gameAction)
         }
 
-        function gameAction() {
+        function gameAction(timestamp) {
 
             const uchiha = document.querySelector('.uchiha');
+
+            // fireballs modify
+
+            let fireBalls = document.querySelectorAll('.fireball');
+            fireBalls.forEach(fireBall => {
+                fireBall.x += game.speed * game.fireBallMultiplier;
+                fireBall.style.left = fireBall.x + 'px';
+
+                if (fireBall.x + fireBall.offsetWidth > gameArea.offsetWidth) {
+                    fireBall.parentElement.removeChild(fireBall);
+                }
+            })
 
             // Gravity
 
@@ -94,20 +109,37 @@
                 uchiha.style.left = player.x + 'px';
             }
 
+            if (keys.Space && timestamp - player.lastTimeFiredFireball > game.fireInterval) {
+                uchiha.classList.add('uchiha-fireball');
+
+                // Fireball
+                addFireBall(player);
+                player.lastTimeFiredFireball=timestamp;
+            } else {
+                uchiha.classList.remove('uchiha-fireball');
+            }
+
             // Score
 
             gamePoints.textContent = gameScene.score++;
-            
+
             window.requestAnimationFrame(gameAction)
         }
 
-        function onKeyDown(e) {
+        function addFireBall(player) {
+            let fireBall = document.createElement('div');
+            fireBall.classList.add('fireball');
+            fireBall.style.top = (player.y + player.height / 2 - 60) + 'px';
+            fireBall.x = (player.x + player.width);
+            fireBall.style.left = fireBall.x + 'px';
+            gameArea.appendChild(fireBall);
+        }
 
+        function onKeyDown(e) {
             keys[e.code] = true;
         }
 
         function onKeyUp(e) {
-
             keys[e.code] = false;
         }
     </script>
