@@ -78,7 +78,7 @@
                 cloud.classList.add('cloud');
                 cloud.x = gameArea.offsetWidth - 300;
                 cloud.style.left = cloud.x + 'px';
-                cloud.style.top = '100px';
+                cloud.style.top = (gameArea.offsetHeight - 300) * Math.random() + 'px';
 
                 gameArea.appendChild(cloud);
                 gameScene.lastCloudSpawn = timestamp;
