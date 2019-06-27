@@ -44,12 +44,14 @@
             movingMultiplier: 3,
             fireBallMultiplier: 3,
             fireInterval: 1000,
-            cloudSpawnInterval: 7000
+            cloudSpawnInterval: 7000,
+            shurikenSpawnInterval: 2000
         };
 
         let gameScene = {
             score: 0,
-            lastCloudSpawn: 0
+            lastCloudSpawn: 0,
+            lastShurikenSpawn: 0
         }
 
         function onGameStart() {
@@ -71,6 +73,19 @@
 
             const uchiha = document.querySelector('.uchiha');
 
+            // Shuriken
+
+            if (timestamp - gameScene.lastShurikenSpawn > game.shurikenSpawnInterval) {
+                let shuriken = document.createElement('div');
+                shuriken.classList.add('shuriken');
+                shuriken.x = gameArea.offsetWidth - 75;
+                shuriken.style.left = shuriken.x + 'px';
+                shuriken.style.top = (gameArea.offsetHeight - 75) * Math.random() + 'px';
+
+                gameArea.appendChild(shuriken);
+                gameScene.lastShurikenSpawn = timestamp;
+            }
+
             // Clouds
 
             if (timestamp - gameScene.lastCloudSpawn > game.cloudSpawnInterval) {
@@ -83,6 +98,18 @@
                 gameArea.appendChild(cloud);
                 gameScene.lastCloudSpawn = timestamp;
             }
+
+            // Shuriken modify
+
+            let shurikens = document.querySelectorAll('.shuriken');
+            shurikens.forEach(shuriken => {
+                shuriken.x -= game.speed;
+                shuriken.style.left = shuriken.x + 'px';
+
+                if (shuriken.x + shurikens.offsetWidth <= 0) {
+                    shuriken.parentElement.removeChild(shuriken);
+                }
+            })
 
             // Clouds modify
 
