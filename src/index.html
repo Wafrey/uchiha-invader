@@ -30,6 +30,7 @@
         document.addEventListener('keyup', onKeyUp);
 
         let keys = {};
+
         let player = {
             x: 30,
             y: 200,
@@ -37,15 +38,18 @@
             height: 0,
             lastTimeFiredFireball: 0
         };
+
         let game = {
             speed: 2,
             movingMultiplier: 3,
             fireBallMultiplier: 3,
-            fireInterval: 1000
+            fireInterval: 1000,
+            cloudSpawnInterval: 7000
         };
 
         let gameScene = {
-            score: 0
+            score: 0,
+            lastCloudSpawn: 0
         }
 
         function onGameStart() {
@@ -67,7 +71,32 @@
 
             const uchiha = document.querySelector('.uchiha');
 
-            // fireballs modify
+            // Clouds
+
+            if (timestamp - gameScene.lastCloudSpawn > game.cloudSpawnInterval) {
+                let cloud = document.createElement('div');
+                cloud.classList.add('cloud');
+                cloud.x = gameArea.offsetWidth - 300;
+                cloud.style.left = cloud.x + 'px';
+                cloud.style.top = '100px';
+
+                gameArea.appendChild(cloud);
+                gameScene.lastCloudSpawn = timestamp;
+            }
+
+            // Clouds modify
+
+            let clouds = document.querySelectorAll('.cloud');
+            clouds.forEach(cloud => {
+                cloud.x -= game.speed;
+                cloud.style.left = cloud.x + 'px';
+
+                if (cloud.x + clouds.offsetWidth <= 0) {
+                    cloud.parentElement.removeChild(cloud);
+                }
+            })
+
+            // Fireballs modify
 
             let fireBalls = document.querySelectorAll('.fireball');
             fireBalls.forEach(fireBall => {
@@ -114,7 +143,7 @@
 
                 // Fireball
                 addFireBall(player);
-                player.lastTimeFiredFireball=timestamp;
+                player.lastTimeFiredFireball = timestamp;
             } else {
                 uchiha.classList.remove('uchiha-fireball');
             }
