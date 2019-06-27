@@ -111,8 +111,25 @@ body {
 
 .shuriken{
     position: absolute;
+    z-index: 2;
     width: 75px;
     height: 75px;
     background-image: url(../images/shuriken.png);
     background-size: cover;
+}
+
+/* Game Over CSS */
+
+.game-over{
+    z-index: 40;
+    font-size: 2.5rem;
+    position: absolute;
+    background: #FFF;
+    color: red;
+    width: 50%;
+    top: 170px;
+    left: 25%;
+    padding: 35px;
+    border-radius: 6px;
+    text-align: center;
 }

@@ -14,7 +14,7 @@
         <div class="game-score"><span class="points">0</span> points</div>
         <div class="game-start">Press here to Play!</div>
         <div class="game-area"></div>
-        <div class="game-over"></div>
+        <div class="game-over hide">Game Over!</div>
     </div>
 
     <script>
@@ -23,7 +23,6 @@
         const gameOver = document.querySelector('.game-over');
         const gameScore = document.querySelector('.game-score');
         const gamePoints = document.querySelector('.game-score .points');
-        console.log(gamePoints);
 
         gameStart.addEventListener('click', onGameStart);
         document.addEventListener('keydown', onKeyDown);
@@ -40,7 +39,7 @@
         };
 
         let game = {
-            speed: 2,
+            speed: 3,
             movingMultiplier: 3,
             fireBallMultiplier: 3,
             fireInterval: 1000,
@@ -49,6 +48,7 @@
         };
 
         let gameScene = {
+            isGameActive: true,
             score: 0,
             lastCloudSpawn: 0,
             lastShurikenSpawn: 0
@@ -103,7 +103,7 @@
 
             let shurikens = document.querySelectorAll('.shuriken');
             shurikens.forEach(shuriken => {
-                shuriken.x -= game.speed;
+                shuriken.x -= game.speed * 2;
                 shuriken.style.left = shuriken.x + 'px';
 
                 if (shuriken.x + shurikens.offsetWidth <= 0) {
@@ -175,11 +175,37 @@
                 uchiha.classList.remove('uchiha-fireball');
             }
 
+            // Collision detection
+
+            shurikens.forEach(shuriken => {
+                if (isCollision(uchiha, shuriken)) {
+                    gameOverAction();
+                }
+            })
+
             // Score
 
             gamePoints.textContent = gameScene.score++;
 
-            window.requestAnimationFrame(gameAction)
+            if (gameScene.isGameActive) {
+                window.requestAnimationFrame(gameAction);
+            }
+        }
+
+        function gameOverAction() {
+            gameScene.isGameActive = false;
+            gameOver.textContent=`Game Over! You've reached ${gameScene.score} points.`;
+            gameOver.classList.remove('hide');
+        }
+
+        function isCollision(firstEl, secondEl) {
+            let firstRect = firstEl.getBoundingClientRect();
+            let secondRect = secondEl.getBoundingClientRect();
+
+            return !(firstRect.top > secondRect.bottom ||
+                firstRect.bottom < secondRect.top ||
+                firstRect.right < secondRect.left ||
+                firstRect.left > secondRect.right)
         }
 
         function addFireBall(player) {
