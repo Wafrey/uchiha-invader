@@ -61,8 +61,10 @@ body {
 .game-score {
     position: absolute;
     z-index: 1;
+    border-radius: 10px;
     background: rgb(44, 41, 41);
     color: #FFF;
+    padding: 0.5rem;
     text-align: center;
     margin-left: 1rem;
     margin-top: 0.3rem;

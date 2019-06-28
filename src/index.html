@@ -44,7 +44,8 @@
             fireBallMultiplier: 3,
             fireInterval: 1000,
             cloudSpawnInterval: 7000,
-            shurikenSpawnInterval: 2000
+            shurikenSpawnInterval: 1500,
+            shurikenDestroyBonus: 300
         };
 
         let gameScene = {
@@ -74,7 +75,6 @@
             const uchiha = document.querySelector('.uchiha');
 
             // Shuriken
-
             if (timestamp - gameScene.lastShurikenSpawn > game.shurikenSpawnInterval) {
                 let shuriken = document.createElement('div');
                 shuriken.classList.add('shuriken');
@@ -87,7 +87,6 @@
             }
 
             // Clouds
-
             if (timestamp - gameScene.lastCloudSpawn > game.cloudSpawnInterval) {
                 let cloud = document.createElement('div');
                 cloud.classList.add('cloud');
@@ -100,7 +99,6 @@
             }
 
             // Shuriken modify
-
             let shurikens = document.querySelectorAll('.shuriken');
             shurikens.forEach(shuriken => {
                 shuriken.x -= game.speed * 2;
@@ -112,7 +110,6 @@
             })
 
             // Clouds modify
-
             let clouds = document.querySelectorAll('.cloud');
             clouds.forEach(cloud => {
                 cloud.x -= game.speed;
@@ -124,7 +121,6 @@
             })
 
             // Fireballs modify
-
             let fireBalls = document.querySelectorAll('.fireball');
             fireBalls.forEach(fireBall => {
                 fireBall.x += game.speed * game.fireBallMultiplier;
@@ -136,7 +132,6 @@
             })
 
             // Gravity
-
             let isInAir = (player.y + player.height) + 50 < gameArea.offsetHeight;
             if (isInAir) {
                 player.y += game.speed;
@@ -144,7 +139,6 @@
             }
 
             // Register Player input.
-
             if (keys.ArrowUp && player.y > 35) {
                 player.y -= game.speed * game.movingMultiplier;
                 uchiha.style.top = player.y + 'px';
@@ -176,7 +170,6 @@
             }
 
             // Collision detection
-
             shurikens.forEach(shuriken => {
                 if (isCollision(uchiha, shuriken)) {
                     gameOverAction();
@@ -184,7 +177,7 @@
 
                 fireBalls.forEach(fireBall => {
                     if (isCollision(fireBall, shuriken)) {
-                        gameScene.score+=500;
+                        gameScene.score+=game.shurikenDestroyBonus;
                         shuriken.parentElement.removeChild(shuriken);
                         fireBall.parentElement.removeChild(fireBall);
                     }
@@ -192,7 +185,6 @@
             })
 
             // Score
-
             gamePoints.textContent = gameScene.score++;
 
             if (gameScene.isGameActive) {
@@ -202,8 +194,10 @@
 
         function gameOverAction() {
             gameScene.isGameActive = false;
+            gameScore.parentElement.removeChild(gameScore);
             gameOver.textContent = `Game Over! You've reached ${gameScene.score} points.`;
             gameOver.classList.remove('hide');
+
         }
 
         function isCollision(firstEl, secondEl) {
