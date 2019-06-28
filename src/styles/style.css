@@ -126,6 +126,7 @@ body {
     position: absolute;
     background: #FFF;
     color: red;
+    border: 1px solid red;
     width: 50%;
     top: 170px;
     left: 25%;
