@@ -1,6 +1,6 @@
 let keys = {};
 
-let state = {
+const initialState = () => ({
     player: {
         x: 30,
         y: 200,
@@ -13,8 +13,19 @@ let state = {
         score: 0,
         lastCloudSpawn: 0,
         lastShurikenSpawn: 0
-    }
-}
+    },
+    clouds: [],
+    fireBalls: [],
+    shurikens: [],
+});
+
+const next = (state) => ({
+    player: state.player,
+    gameScene: state.gameScene,
+    clouds: state.clouds,
+    fireBalls: state.fireBalls,
+    shurikens: state.shurikens
+})
 
 function gameOverAction() {
     state.gameScene.isGameActive = false;

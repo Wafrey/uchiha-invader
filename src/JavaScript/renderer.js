@@ -8,7 +8,7 @@ gameStart.addEventListener('click', onGameStart);
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
 
-
+let state = initialState();
 
 function onGameStart() {
     gameStart.classList.add('hide');
@@ -27,7 +27,8 @@ function onGameStart() {
 
 const frame = t1 => t2 => {
     if (t2 - t1 > game.frameLength) {
-        gameActionDraw(t2);
+        state = next(state);
+        gameActionDraw(t2, state);
         state.gameScene.isGameActive && window.requestAnimationFrame(frame(t2));
     } else {
         window.requestAnimationFrame(frame(t1));
