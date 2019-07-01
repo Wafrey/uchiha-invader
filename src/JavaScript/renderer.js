@@ -15,26 +15,26 @@ function onGameStart() {
     alert('game started, click okey to continue! Hint: Use your keyboard, and space to shoot!');
 
     const uchiha = document.createElement('div');
-    uchiha.classList.add('uchiha')
-    uchiha.style.top = player.y + 'px';
-    uchiha.style.left = player.x + 'px';
+    uchiha.classList.add('uchiha');
+    uchiha.style.top = state.player.y + 'px';
+    uchiha.style.left = state.player.x + 'px';
     gameArea.appendChild(uchiha);
-    player.width = uchiha.offsetWidth;
-    player.height = uchiha.offsetHeight;
+    state.player.width = uchiha.offsetWidth;
+    state.player.height = uchiha.offsetHeight;
 
     window.requestAnimationFrame(frame(0))
 }
 
 const frame = t1 => t2 => {
     if (t2 - t1 > game.frameLength) {
-        gameAction(t2);
+        gameActionDraw(t2);
         gameScene.isGameActive && window.requestAnimationFrame(frame(t2));
     } else {
         window.requestAnimationFrame(frame(t1));
     }
 }
 
-function gameAction(timestamp) {
+function gameActionDraw(timestamp) {
 
     const uchiha = document.querySelector('.uchiha');
 
@@ -96,39 +96,39 @@ function gameAction(timestamp) {
     })
 
     // Gravity
-    let isInAir = (player.y + player.height) + 50 < gameArea.offsetHeight;
+    let isInAir = (state.player.y + state.player.height) + 50 < gameArea.offsetHeight;
     if (isInAir) {
-        player.y += game.speed;
-        uchiha.style.top = player.y + 'px';
+        state.player.y += game.speed;
+        uchiha.style.top = state.player.y + 'px';
     }
 
     // Register Player input.
-    if (keys.ArrowUp && player.y > 35) {
-        player.y -= game.speed * game.movingMultiplier;
-        uchiha.style.top = player.y + 'px';
+    if (keys.ArrowUp && state.player.y > 35) {
+        state.player.y -= game.speed * game.movingMultiplier;
+        uchiha.style.top = state.player.y + 'px';
     }
 
     if (keys.ArrowDown && isInAir) {
-        player.y += game.speed * game.movingMultiplier;
-        uchiha.style.top = player.y + 'px';
+        state.player.y += game.speed * game.movingMultiplier;
+        uchiha.style.top = state.player.y + 'px';
     }
 
-    if (keys.ArrowLeft && player.x > 10) {
-        player.x -= game.speed * game.movingMultiplier;
-        uchiha.style.left = player.x + 'px';
+    if (keys.ArrowLeft && state.player.x > 10) {
+        state.player.x -= game.speed * game.movingMultiplier;
+        uchiha.style.left = state.player.x + 'px';
     }
 
-    if (keys.ArrowRight && player.x + player.width + 10 < gameArea.offsetWidth) {
-        player.x += game.speed * game.movingMultiplier;
-        uchiha.style.left = player.x + 'px';
+    if (keys.ArrowRight && state.player.x + state.player.width + 10 < gameArea.offsetWidth) {
+        state.player.x += game.speed * game.movingMultiplier;
+        uchiha.style.left = state.player.x + 'px';
     }
 
-    if (keys.Space && timestamp - player.lastTimeFiredFireball > game.fireInterval) {
+    if (keys.Space && timestamp - state.player.lastTimeFiredFireball > game.fireInterval) {
         uchiha.classList.add('uchiha-fireball');
 
         // Fireball
-        addFireBall(player);
-        player.lastTimeFiredFireball = timestamp;
+        addFireBall(state.player);
+        state.player.lastTimeFiredFireball = timestamp;
     } else {
         uchiha.classList.remove('uchiha-fireball');
     }

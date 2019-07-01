@@ -1,18 +1,20 @@
 let keys = {};
 
-let player = {
-    x: 30,
-    y: 200,
-    width: 0,
-    height: 0,
-    lastTimeFiredFireball: 0
-};
-
 let gameScene = {
     isGameActive: true,
     score: 0,
     lastCloudSpawn: 0,
     lastShurikenSpawn: 0
+}
+
+let state = {
+    player: {
+        x: 30,
+        y: 200,
+        width: 0,
+        height: 0,
+        lastTimeFiredFireball: 0
+    },
 }
 
 function gameOverAction() {
