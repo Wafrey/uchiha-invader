@@ -28,7 +28,7 @@ function onGameStart() {
 const frame = t1 => t2 => {
     if (t2 - t1 > game.frameLength) {
         gameActionDraw(t2);
-        gameScene.isGameActive && window.requestAnimationFrame(frame(t2));
+        state.gameScene.isGameActive && window.requestAnimationFrame(frame(t2));
     } else {
         window.requestAnimationFrame(frame(t1));
     }
@@ -39,7 +39,7 @@ function gameActionDraw(timestamp) {
     const uchiha = document.querySelector('.uchiha');
 
     // Shuriken
-    if (timestamp - gameScene.lastShurikenSpawn > game.shurikenSpawnInterval) {
+    if (timestamp - state.gameScene.lastShurikenSpawn > game.shurikenSpawnInterval) {
         let shuriken = document.createElement('div');
         shuriken.classList.add('shuriken');
         shuriken.x = gameArea.offsetWidth - 75;
@@ -47,11 +47,11 @@ function gameActionDraw(timestamp) {
         shuriken.style.top = (gameArea.offsetHeight - 75) * Math.random() + 'px';
 
         gameArea.appendChild(shuriken);
-        gameScene.lastShurikenSpawn = timestamp;
+        state.gameScene.lastShurikenSpawn = timestamp;
     }
 
     // Clouds
-    if (timestamp - gameScene.lastCloudSpawn > game.cloudSpawnInterval) {
+    if (timestamp - state.gameScene.lastCloudSpawn > game.cloudSpawnInterval) {
         let cloud = document.createElement('div');
         cloud.classList.add('cloud');
         cloud.x = gameArea.offsetWidth - 300;
@@ -59,7 +59,7 @@ function gameActionDraw(timestamp) {
         cloud.style.top = (gameArea.offsetHeight - 300) * Math.random() + 'px';
 
         gameArea.appendChild(cloud);
-        gameScene.lastCloudSpawn = timestamp;
+        state.gameScene.lastCloudSpawn = timestamp;
     }
 
     // Shuriken modify
@@ -141,7 +141,7 @@ function gameActionDraw(timestamp) {
 
         fireBalls.forEach(fireBall => {
             if (isCollision(fireBall, shuriken)) {
-                gameScene.score += game.shurikenDestroyBonus;
+                state.gameScene.score += game.shurikenDestroyBonus;
                 shuriken.parentElement.removeChild(shuriken);
                 fireBall.parentElement.removeChild(fireBall);
             }
@@ -149,5 +149,5 @@ function gameActionDraw(timestamp) {
     })
 
     // Score
-    gamePoints.textContent = gameScene.score++;
+    gamePoints.textContent = state.gameScene.score++;
 }

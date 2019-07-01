@@ -1,12 +1,5 @@
 let keys = {};
 
-let gameScene = {
-    isGameActive: true,
-    score: 0,
-    lastCloudSpawn: 0,
-    lastShurikenSpawn: 0
-}
-
 let state = {
     player: {
         x: 30,
@@ -15,12 +8,18 @@ let state = {
         height: 0,
         lastTimeFiredFireball: 0
     },
+    gameScene: {
+        isGameActive: true,
+        score: 0,
+        lastCloudSpawn: 0,
+        lastShurikenSpawn: 0
+    }
 }
 
 function gameOverAction() {
-    gameScene.isGameActive = false;
+    state.gameScene.isGameActive = false;
     gameScore.parentElement.removeChild(gameScore);
-    gameOver.textContent = `Game Over! You've reached ${gameScene.score} points.`;
+    gameOver.textContent = `Game Over! You've reached ${state.gameScene.score} points.`;
     gameOver.classList.remove('hide');
 
 }
