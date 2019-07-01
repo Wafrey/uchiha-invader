@@ -22,14 +22,19 @@ function onGameStart() {
     player.width = uchiha.offsetWidth;
     player.height = uchiha.offsetHeight;
 
-    window.requestAnimationFrame(gameAction(0))
+    window.requestAnimationFrame(frame(0))
 }
 
-const frame = (t1) => (t2) => {
+const frame = t1 => t2 => {
+    if (t2 - t1 > game.frameLength) {
+        gameAction(t2);
+        gameScene.isGameActive && window.requestAnimationFrame(frame(t2));
+    } else {
+        window.requestAnimationFrame(frame(t1));
+    }
+}
 
-};
-
-const gameAction = (t1) => function(timestamp) {
+function gameAction(timestamp) {
 
     const uchiha = document.querySelector('.uchiha');
 
@@ -145,8 +150,4 @@ const gameAction = (t1) => function(timestamp) {
 
     // Score
     gamePoints.textContent = gameScene.score++;
-
-    if (gameScene.isGameActive) {
-        window.requestAnimationFrame(gameAction);
-    }
 }
