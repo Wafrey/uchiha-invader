@@ -8,7 +8,9 @@ gameStart.addEventListener('click', onGameStart);
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
 
-let state = initialState();
+let state = initialState({
+    areaWidth: gameArea.offsetWidth
+});
 
 function onGameStart() {
     gameStart.classList.add('hide');
@@ -90,14 +92,7 @@ function gameActionDraw(timestamp) {
 
     state.fireBalls.forEach(f => f.el.style.left = f.x + 'px');
 
-    fireBalls.forEach(fireBall => {
-        //fireBall.x += game.speed * game.fireBallMultiplier;
-        //fireBall.style.left = fireBall.x + 'px';
-
-        if (fireBall.x + fireBall.offsetWidth > gameArea.offsetWidth) {
-            fireBall.parentElement.removeChild(fireBall);
-        }
-    })
+    
 
     // Gravity
     let isInAir = (state.player.y + state.player.height) + 50 < gameArea.offsetHeight;
@@ -147,7 +142,7 @@ function gameActionDraw(timestamp) {
             if (isCollision(fireBall, shuriken)) {
                 state.gameScene.score += game.shurikenDestroyBonus;
                 shuriken.parentElement.removeChild(shuriken);
-                fireBall.parentElement.removeChild(fireBall);
+                //fireBall.parentElement.removeChild(fireBall);
             }
         })
     })
