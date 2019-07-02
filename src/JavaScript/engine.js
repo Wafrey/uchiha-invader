@@ -22,7 +22,7 @@ const initialState = () => ({
 const nextPlayer = (state) => state.player;
 const nextGameScene = (state) => state.gameScene;
 const nextClouds = (state) => state.clouds;
-const nextFireBalls = (state) => state.fireBalls;
+const nextFireBalls = (state) => state.fireBalls.map(f=>({...f, x: f.x + game.speed * game.fireBallMultiplier}));
 const nextShurikens = (state) => state.shurikens;
 
 const next = (state) => ({
@@ -59,7 +59,7 @@ function addFireBall(state) {
     fireBall.style.left = fireBall.x + 'px';
     gameArea.appendChild(fireBall);
 
-    state.shurikens.push({
+    state.fireBalls.push({
         x: state.player.x,
         y: state.player.y + state.player.height / 2 - 60,
         el: fireBall
