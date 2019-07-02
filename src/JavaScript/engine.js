@@ -19,13 +19,19 @@ const initialState = () => ({
     shurikens: [],
 });
 
+const nextPlayer = (state) => state.player;
+const nextGameScene = (state) => state.gameScene;
+const nextClouds = (state) => state.clouds;
+const nextFireBalls = (state) => state.fireBalls;
+const nextShurikens = (state) => state.shurikens;
+
 const next = (state) => ({
-    player: state.player,
-    gameScene: state.gameScene,
-    clouds: state.clouds,
-    fireBalls: state.fireBalls,
-    shurikens: state.shurikens
-})
+    player: nextPlayer(state),
+    gameScene: nextGameScene(state),
+    clouds: nextClouds(state),
+    fireBalls: nextFireBalls(state),
+    shurikens: nextShurikens(state)
+});
 
 function gameOverAction() {
     state.gameScene.isGameActive = false;
@@ -45,13 +51,19 @@ function isCollision(firstEl, secondEl) {
         firstRect.left > secondRect.right)
 }
 
-function addFireBall(player) {
+function addFireBall(state) {
     let fireBall = document.createElement('div');
     fireBall.classList.add('fireball');
-    fireBall.style.top = (player.y + player.height / 2 - 60) + 'px';
-    fireBall.x = (player.x + player.width);
+    fireBall.style.top = (state.player.y + state.player.height / 2 - 60) + 'px';
+    fireBall.x = (state.player.x + state.player.width);
     fireBall.style.left = fireBall.x + 'px';
     gameArea.appendChild(fireBall);
+
+    state.shurikens.push({
+        x: state.player.x,
+        y: state.player.y + state.player.height / 2 - 60,
+        el: fireBall
+    });
 }
 
 function onKeyDown(e) {

@@ -128,7 +128,7 @@ function gameActionDraw(timestamp) {
         uchiha.classList.add('uchiha-fireball');
 
         // Fireball
-        addFireBall(state.player);
+        addFireBall(state);
         state.player.lastTimeFiredFireball = timestamp;
     } else {
         uchiha.classList.remove('uchiha-fireball');
