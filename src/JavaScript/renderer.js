@@ -10,6 +10,7 @@ document.addEventListener('keyup', onKeyUp);
 
 let state = initialState({
     areaWidth: gameArea.offsetWidth,
+    fireBallWidth: 40,
     shurikenWidth: 75,
     shurikenHeight: 75,
 });

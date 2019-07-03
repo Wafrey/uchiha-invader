@@ -37,8 +37,6 @@ const nextFireBalls = (state) => state.fireBalls
         x: f.x + game.speed * game.fireBallMultiplier
     }));
 
-const removeEl = e => e.parentElement.removeChild(e)
-
 const nextShurikens = (state) => state.shurikens
     .filter(s => {
         if (s.x + state.gameScene.shurikenWidth <= 0) {
