@@ -1,8 +1,6 @@
 let keys = {};
 
-const initialState = ({
-    areaWidth
-}) => ({
+const initialState = (options) => ({
     player: {
         x: 30,
         y: 200,
@@ -15,9 +13,7 @@ const initialState = ({
         score: 0,
         lastCloudSpawn: 0,
         lastShurikenSpawn: 0,
-        areaWidth: areaWidth,
-        fireBallWidth: 40,
-        fireBallHeight: 40
+        ...options
     },
     clouds: [],
     fireBalls: [],
@@ -41,7 +37,20 @@ const nextFireBalls = (state) => state.fireBalls
         x: f.x + game.speed * game.fireBallMultiplier
     }));
 
-const nextShurikens = (state) => state.shurikens;
+const removeEl = e => e.parentElement.removeChild(e)
+
+const nextShurikens = (state) => state.shurikens
+    .filter(s => {
+        if (s.x + state.gameScene.shurikenWidth <= 0) {
+            removeEl(s.el);
+            return false;
+        }
+        return true;
+    })
+    .map(s => {
+        s.x -= game.speed * 2;
+        return s;
+    });
 
 const next = (state) => ({
     player: nextPlayer(state),

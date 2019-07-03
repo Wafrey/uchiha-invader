@@ -9,7 +9,9 @@ document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
 
 let state = initialState({
-    areaWidth: gameArea.offsetWidth
+    areaWidth: gameArea.offsetWidth,
+    shurikenWidth: 75,
+    shurikenHeight: 75,
 });
 
 function onGameStart() {
@@ -51,6 +53,12 @@ function gameActionDraw(timestamp) {
 
         gameArea.appendChild(shuriken);
         state.gameScene.lastShurikenSpawn = timestamp;
+
+        state.shurikens.push({
+            x: gameArea.offsetWidth - 75,
+            y: (gameArea.offsetHeight - 75) * Math.random() + 'px',
+            el: shuriken
+        });
     }
 
     // Clouds
