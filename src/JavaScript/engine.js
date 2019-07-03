@@ -30,7 +30,7 @@ const nextClouds = (state) => state.clouds;
 
 const nextFireBalls = (state) => state.fireBalls
     .filter(f => {
-        if (f.x + state.gameScene.fireBallWidth > state.gameScene.areaWidth) {
+        if (f.x + state.gameScene.fireBallWidth > state.gameScene.areaWidth - 20) {
             f.el.parentElement.removeChild(f.el);
             return false;
         }
