@@ -76,7 +76,7 @@ body {
     position: absolute;
     width: 300px;
     height: 170px;
-    background-image: url(../images/cloud.png);
+    background-image: url(../Images/cloud.png);
     background-size: cover;
 }
 
@@ -87,7 +87,7 @@ body {
     z-index: 10;
     width: 90px;
     height: 156px;
-    background-image: url(../images/sasuke.png);
+    background-image: url(../Images/sasuke.png);
     background-size: cover;
 }
 
@@ -95,7 +95,7 @@ body {
     position: absolute;
     width: 90px;
     height: 156px;
-    background-image: url(../images/sasuke-fireball.png);
+    background-image: url(../Images/sasuke-fireball.png);
     background-size: cover;
 }
 
@@ -105,7 +105,7 @@ body {
     position: absolute;
     width: 40px;
     height: 40px;
-    background-image: url(../images/fire-ball.png);
+    background-image: url(../Images/fire-ball.png);
     background-size: cover;
 }
 
@@ -116,7 +116,7 @@ body {
     z-index: 2;
     width: 75px;
     height: 75px;
-    background-image: url(../images/shuriken.png);
+    background-image: url(../Images/shuriken.png);
     background-size: cover;
 }
 
