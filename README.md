@@ -17,5 +17,7 @@ Georgi Dimitrov - [https://www.linkedin.com/in/wafrey/](https://www.linkedin.com
 
 Project Link: [https://github.com/Wafrey/uchiha-invader](https://github.com/Wafrey/uchiha-invader)
 
+Try it: [https://gid-tech.info/uchiha-invader/](https://gid-tech.info/uchiha-invader/)
+
 
 
