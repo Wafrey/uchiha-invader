@@ -143,8 +143,11 @@ function gameAction(timestamp) {
 function gameOverAction() {
     gameScene.isGameActive = false;
     gameScore.parentElement.removeChild(gameScore);
-    gameOver.textContent = `Game Over! You've reached ${gameScene.score} points. \n Refresh the page to play again!`;
+    gameOver.textContent = `Game Over! You've reached ${gameScene.score} points \n Click to try again!`;
     gameOver.classList.remove('hide');
+    gameOver.addEventListener('click', ()=>{
+        window.location.reload();
+    });
 }
 function isCollision(firstEl, secondEl) {
     let firstRect = firstEl.getBoundingClientRect();
