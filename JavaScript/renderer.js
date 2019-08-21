@@ -1,5 +1,6 @@
 const gameStart = document.querySelector('.game-start');
 const gameArea = document.querySelector('.game-area');
+const gameInfo = document.querySelector('.game-info');
 const gameOver = document.querySelector('.game-over');
 const gameScore = document.querySelector('.game-score');
 const gamePoints = document.querySelector('.game-score .points');
@@ -31,6 +32,7 @@ let gameScene = {
 }
 function onGameStart() {
     gameStart.classList.add('hide');
+    gameInfo.classList.add('hide');
     alert('game started, click okey to continue! Hint: Use your keyboard, and space to shoot!');
     const uchiha = document.createElement('div');
     uchiha.classList.add('uchiha')

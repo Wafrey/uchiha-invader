@@ -53,7 +53,21 @@ body {
     background: rgb(44, 41, 41);
     border: 2px solid #FFF;
     color: #FFF;
-    cursor: pointer;
+    cursor: pointer;  
+}
+
+/* Game info CSS */
+
+.game-info {
+    font-size: 1.5rem;
+    position: absolute;
+    background: #FFF;
+    z-index: 1;
+    text-align: center;
+    top: 420px;
+    width: 50%;
+    left: 25%;
+    border-radius: 6px;
 }
 
 /* Score CSS */
@@ -72,7 +86,7 @@ body {
 
 /* Cloud CSS */
 
-.cloud{
+.cloud {
     position: absolute;
     width: 300px;
     height: 170px;
@@ -101,7 +115,7 @@ body {
 
 /* Fireball CSS */
 
-.fireball{
+.fireball {
     position: absolute;
     width: 40px;
     height: 40px;
@@ -111,7 +125,7 @@ body {
 
 /* Shuriken CSS */
 
-.shuriken{
+.shuriken {
     position: absolute;
     z-index: 2;
     width: 75px;
@@ -122,7 +136,7 @@ body {
 
 /* Game Over CSS */
 
-.game-over{
+.game-over {
     z-index: 40;
     font-size: 2.5rem;
     position: absolute;
